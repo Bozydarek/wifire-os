@@ -17,21 +17,25 @@ SECTIONS
   /* higher address of the user mode stack */
   _estack = ORIGIN(ram) + LENGTH(ram);
 
-  .text : AT(ORIGIN(flash))
+  .init : AT(ORIGIN(flash))
   {
-    __text = ABSOLUTE(.);
     /* Exception handlers. */
     *(.exception)
     . = 0x500;
     /* Execution starts here. */
     *(.init)
+  } > flash
+
+  .text : AT(ORIGIN(prog))
+  {
+    __text = ABSOLUTE(.);
     *(.text .text.*)
     . = ALIGN (4);
     __rodata_start = ABSOLUTE(.);
     *(.rodata .rodata.*)
     __rodata_end = ABSOLUTE(.);
     __etext = ABSOLUTE(.);
-  } > flash
+  } > prog
 
   /* Device configuration.  */
   .devcfg : AT(ORIGIN(devcfg))
@@ -81,5 +85,6 @@ SECTIONS
     *(.gnu.attributes)
     *(.comment)
     *(.MIPS.abiflags)
+    *(.eh_frame)
   }
 }
