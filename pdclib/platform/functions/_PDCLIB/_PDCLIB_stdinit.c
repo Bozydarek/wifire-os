@@ -379,7 +379,7 @@ struct _PDCLIB_locale _PDCLIB_global_locale = {
     },
     ._CType = &global_ctype[1],
     ._ErrnoStr = {
-        /* no error   */ (char *)"",
+        /* no error   */ (char *)"Success",
         /* ERANGE     */ (char *)"ERANGE: Range error",
         /* EDOM       */ (char *)"EDOM: Domain error",
         /* EILSEQ     */ (char *)"EILSEQ: Illegal sequence",
